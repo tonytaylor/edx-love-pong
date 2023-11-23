@@ -325,8 +325,7 @@ function love.draw()
             0, 10, VIRTUAL_WIDTH, 'center')
         love.graphics.printf('Press Enter to serve!', 0, 20, VIRTUAL_WIDTH, 'center')
     elseif gameState == 'play' then
-        -- no UI messages to display in play
-        -- aiPlayer:render()
+        displayPlayerMetadata()
     elseif gameState == 'done' then
         -- UI messages
         love.graphics.setFont(largeFont)
@@ -374,8 +373,21 @@ function displayFPS()
 end
 
 function createPlayers(player1Type, player2Type)
-    table.insert(players, Player(paddle1, player1Type, 'player1'))
-    table.insert(players, Player(paddle2, player2Type, 'player2'))
+    table.insert(players, Player(paddle1, player1Type, 'p1'))
+    table.insert(players, Player(paddle2, player2Type, 'p2'))
+end
+
+function displayPlayerMetadata()
+    love.graphics.setFont(smallFont)
+    love.graphics.setColor(0, 255/255, 0, 255/255)
+    local x = 10
+    local y = 20
+    for i, player in ipairs(players) do
+        love.graphics.print('ID: ' .. player.id .. ', Type: ' .. player.type, x, y)
+        y = y + 10
+    end
+    y = 20
+    love.graphics.setColor(255, 255, 255, 255)
 end
 
 function startGame()
