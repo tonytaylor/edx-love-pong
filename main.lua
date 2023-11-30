@@ -264,17 +264,13 @@ function love.keypressed(key)
         -- the function LÖVE2D uses to quit the application
         love.event.quit()
     elseif key == '1' and gameState == 'start' then
-        createPlayers('human', 'computer')
-        startGame()
+        startGameWithPlayerConfig('human', 'computer')
     elseif key == '2' and gameState == 'start' then
-        createPlayers('computer', 'human')
-        startGame()
+        startGameWithPlayerConfig('computer', 'human')
     elseif key == '3' and gameState == 'start' then
-        createPlayers('human', 'human')
-        startGame()
+        startGameWithPlayerConfig('human', 'human')
     elseif key == '4' and gameState == 'start' then
-        createPlayers('computer', 'computer')
-        startGame()
+        startGameWithPlayerConfig('computer', 'computer')
     -- if we press enter during either the start or serve phase, it should
     -- transition to the next appropriate state
     elseif key == 'enter' or key == 'return' then
@@ -390,6 +386,7 @@ function displayPlayerMetadata()
     love.graphics.setColor(255, 255, 255, 255)
 end
 
-function startGame()
+function startGameWithPlayerConfig(player1, player2)
+    createPlayers(player1, player2)
     gameState = 'serve'
 end
